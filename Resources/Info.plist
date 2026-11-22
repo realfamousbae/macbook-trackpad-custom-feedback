@@ -4,10 +4,11 @@
 <dict>
     <key>CFBundleIdentifier</key><string>com.realfamousbae.trackpad-feedback</string>
     <key>CFBundleExecutable</key><string>TrackpadFeedback</string>
+    <key>CFBundleIconFile</key><string>AppIcon.icns</string>
     <key>CFBundleName</key><string>Trackpad Feedback</string>
     <key>CFBundlePackageType</key><string>APPL</string>
-    <key>CFBundleShortVersionString</key><string>1.0.4</string>
-    <key>CFBundleVersion</key><string>5</string>
+    <key>CFBundleShortVersionString</key><string>1.0.5</string>
+    <key>CFBundleVersion</key><string>6</string>
     <key>LSMinimumSystemVersion</key><string>15.0</string>
     <key>LSUIElement</key><true/>
     <key>NSHumanReadableCopyright</key><string>Trackpad Feedback</string>

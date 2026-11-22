@@ -5,6 +5,14 @@ cd "$(dirname "$0")"
 app="build/Trackpad Feedback.app"
 mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
 cp Resources/Info.plist "$app/Contents/Info.plist"
+iconset="build/AppIcon.iconset"
+mkdir -p "$iconset"
+for size in 16 32 128 256 512; do
+    sips -z "$size" "$size" Resources/AppIcon.png --out "$iconset/icon_${size}x${size}.png" >/dev/null
+    retina_size=$((size * 2))
+    sips -z "$retina_size" "$retina_size" Resources/AppIcon.png --out "$iconset/icon_${size}x${size}@2x.png" >/dev/null
+done
+iconutil --convert icns "$iconset" --output "$app/Contents/Resources/AppIcon.icns"
 sample_copy="$(mktemp "$app/Contents/Resources/example.XXXXXX")"
 cat Resources/example.mp3 > "$sample_copy"
 chmod 644 "$sample_copy"
