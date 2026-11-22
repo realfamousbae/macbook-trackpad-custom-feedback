@@ -1,30 +1,32 @@
 # Trackpad Feedback
 
-Trackpad Feedback воспроизводит звук при резком сильном касании встроенного трекпада. Обычные клики остаются тихими. Приложение работает в строке меню и распознаёт касания даже без щелчка.
+[Читать по-русски](README.ru.md)
 
-## Установка
+Trackpad Feedback is a macOS menu bar app that plays a sound when you press the built-in trackpad sharply. Ordinary clicks stay quiet. A sharp touch can trigger playback before the trackpad clicks.
 
-Нужен MacBook с Apple Silicon, встроенным трекпадом Force Touch и macOS 15 или новее. Приложение проверено на MacBook Air M2 с macOS 15.
+## Installation
 
-Скачай ZIP из последнего релиза, распакуй его и перенеси `Trackpad Feedback.app` в «Программы». Сборка подписана локальной подписью без нотариального заверения Apple. [Последний релиз](https://github.com/realfamousbae/macbook-trackpad-custom-feedback/releases/latest)
+Use a MacBook with Apple Silicon, a built-in Force Touch trackpad, and macOS 15 or later. Tested on a MacBook Air M2 with macOS 15.
 
-## Использование
+Download the ZIP, unzip it, and move `Trackpad Feedback.app` to Applications. The app is ad hoc signed and has no Apple notarization. The current app interface is in Russian. [Latest release](https://github.com/realfamousbae/macbook-trackpad-custom-feedback/releases/latest)
 
-При первом запуске пройди калибровку. Приложение попросит сделать обычные клики, плавные нажатия и короткие резкие касания без щелчка. В меню ◉ можно выключить реакцию, повторить калибровку или проверить звук.
+## Usage
 
-Приложение добавит встроенный `example.mp3` в папку звуков. Открой её через меню ◉, чтобы заменить файл или добавить свои MP3, WAV и M4A. Файлы играют по имени и по кругу. Пока текущий звук играет, новые нажатия пропускаются.
+On first launch, the app guides you through calibration with normal clicks, gradual presses, and short, sharp touches without a click. Open the ◉ menu to toggle playback on sharp presses, recalibrate, or test the sound.
 
-В меню ◉ → «Чувствительность» есть базовый уровень и два отклонения от него на ±10 процентных пунктов. Порог срабатывания составляет 100%, 110% или 120% от порога калибровки.
+The app installs the bundled `example.mp3` in its Sounds folder. Choose **Открыть папку звуков** (Open Sounds Folder) from the ◉ menu to replace the sample or add MP3, WAV, and M4A files. Files play in filename order and loop back to the first. Presses during playback are ignored.
 
-## Сборка из исходников
+Choose **Чувствительность** (Sensitivity) for the baseline setting or an adjustment of ±10 percentage points. The three trigger thresholds are 100%, 110%, and 120% of the calibrated threshold.
 
-На Mac с Xcode запусти `./build.sh` из корня репозитория. Готовое приложение появится в `build/Trackpad Feedback.app`. Сборка включает `Resources/example.mp3`.
+## Build from source
 
-Проверка распознавания на тестовых данных и воспроизведения звука
+Run `./build.sh` from the repository root on a Mac with Xcode. The script creates `build/Trackpad Feedback.app` and bundles `Resources/example.mp3`.
+
+After building, run the detection and playback regression checks.
 
 ```sh
 xcrun swiftc -swift-version 6 Sources/Detection.swift Sources/Sounds.swift Tests/Regression.swift -o build/regression
 build/regression Resources/example.mp3
 ```
 
-Доступ к касаниям реализован через недокументированный системный `MultitouchSupport`. После обновления macOS может потребоваться проверка совместимости. [Описание структуры данных трекпада](https://github.com/MatMercer/mactic/blob/main/docs/implementation.md)
+The app reads touch data through the private `MultitouchSupport` framework. Compatibility may need to be rechecked after macOS updates. [Trackpad data layout](https://github.com/MatMercer/mactic/blob/main/docs/implementation.md)
